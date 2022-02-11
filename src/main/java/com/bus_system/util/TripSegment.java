@@ -5,13 +5,13 @@ import java.time.LocalTime;
 import java.util.Optional;
 import java.util.function.Function;
 
-public record StopTimes(Optional<Integer> tripID, LocalTime arrivalTime, LocalTime departureTime,
-                        Optional<Integer> stopID, Optional<Integer> stopSequence, Optional<Integer> stopHeadsign,
-                        Optional<Integer> pickupType, Optional<Integer> dropOffType,
-                        Optional<BigDecimal> distTravelled) {
+public record TripSegment(Optional<Integer> tripID, LocalTime arrivalTime, LocalTime departureTime,
+                          Optional<Integer> stopID, Optional<Integer> stopSequence, Optional<Integer> stopHeadsign,
+                          Optional<Integer> pickupType, Optional<Integer> dropOffType,
+                          Optional<BigDecimal> distTravelled) {
 
-    public StopTimes(String tripID, String arrivalTime, String departureTime, String stopID, String stopSequence,
-                     String stopHeadsign, String pickupType, String dropOffType, String distTravelled) {
+    public TripSegment(String tripID, String arrivalTime, String departureTime, String stopID, String stopSequence,
+                       String stopHeadsign, String pickupType, String dropOffType, String distTravelled) {
         this(parse(tripID, Integer::parseInt), parseString(arrivalTime), parseString(departureTime),
                 parse(stopID, Integer::parseInt), parse(stopSequence, Integer::parseInt),
                 parse(stopHeadsign, Integer::parseInt), parse(pickupType, Integer::parseInt),

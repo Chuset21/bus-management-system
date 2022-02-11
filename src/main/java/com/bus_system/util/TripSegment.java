@@ -9,7 +9,7 @@ import java.util.function.Function;
 public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalTime, Optional<LocalTime> departureTime,
                           Optional<Integer> stopID, Optional<Integer> stopSequence, Optional<Integer> stopHeadsign,
                           Optional<Integer> pickupType, Optional<Integer> dropOffType,
-                          Optional<BigDecimal> distTravelled) {
+                          Optional<BigDecimal> distTravelled) implements Comparable<TripSegment> {
 
     public TripSegment(String tripID, String arrivalTime, String departureTime, String stopID, String stopSequence,
                        String stopHeadsign, String pickupType, String dropOffType, String distTravelled) {
@@ -42,5 +42,15 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
                 formatted(getStringValue(tripID), getStringValue(arrivalTime), getStringValue(departureTime),
                         getStringValue(stopID), getStringValue(stopSequence), getStringValue(stopHeadsign),
                         getStringValue(pickupType), getStringValue(dropOffType), getStringValue(distTravelled));
+    }
+
+    @Override
+    public int compareTo(TripSegment o) {
+        if (o.arrivalTime.isEmpty()) {
+            return this.arrivalTime.isEmpty() ? 0 : -1;
+        } else if (this.arrivalTime.isEmpty()) {
+            return 1;
+        }
+        return this.arrivalTime.get().compareTo(o.arrivalTime.get());
     }
 }

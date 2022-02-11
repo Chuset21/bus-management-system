@@ -4,12 +4,21 @@ import java.io.*;
 import java.util.*;
 
 public class Trips {
+
+    private static final Comparator<TripSegment> TRIP_SEGMENT_COMPARABLE = (o1, o2) -> {
+        if (o1.arrivalTime().isEmpty()) {
+            return o2.arrivalTime().isEmpty() ? 0 : -1;
+        } else if (o2.arrivalTime().isEmpty()) {
+            return 1;
+        }
+        return o1.arrivalTime().get().compareTo(o2.arrivalTime().get());
+    };
     private final Map<Integer, List<TripSegment>> tripSegments;
 
     public Trips(String filePath) throws IOException {
         tripSegments = new TreeMap<>(); // Provides ordering by key
         getDataFromFile(filePath);
-        tripSegments.forEach((k, v) -> Collections.sort(v)); // Sort by time
+        tripSegments.forEach((k, v) -> v.sort(TRIP_SEGMENT_COMPARABLE)); // Sort by time
     }
 
     private void getDataFromFile(String filePath) throws IOException {
@@ -36,5 +45,22 @@ public class Trips {
         }
 
         reader.close();
+    }
+
+    public List<TripSegment> searchByArrivalTime(String arrivalTime) {
+        if (arrivalTime == null) {
+            return null;
+        }
+        final List<TripSegment> result = new ArrayList<>();
+
+        for (List<TripSegment> tripSegment : tripSegments.values()) {
+            final int index = Collections.binarySearch(tripSegment, new TripSegment("", arrivalTime, "00:00:00",
+                            "", "", "", "", "", ""), TRIP_SEGMENT_COMPARABLE);
+            if (index >= 0) {
+                result.add(tripSegment.get(index));
+            }
+        }
+
+        return result;
     }
 }

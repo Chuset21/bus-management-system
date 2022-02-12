@@ -1,4 +1,4 @@
-package com.bus_system.util;
+package com.bus_system.trip;
 
 import java.io.*;
 import java.util.*;

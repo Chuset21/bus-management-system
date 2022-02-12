@@ -1,6 +1,5 @@
 package com.bus_system.trip;
 
-import java.math.BigDecimal;
 import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.Optional;
@@ -9,7 +8,7 @@ import java.util.function.Function;
 public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalTime, Optional<LocalTime> departureTime,
                           Optional<Integer> stopID, Optional<Integer> stopSequence, Optional<Integer> stopHeadsign,
                           Optional<Integer> pickupType, Optional<Integer> dropOffType,
-                          Optional<BigDecimal> distTravelled) {
+                          Optional<Double> distTravelled) {
 
     public TripSegment(String tripID, String arrivalTime, String departureTime, String stopID, String stopSequence,
                        String stopHeadsign, String pickupType, String dropOffType, String distTravelled) {
@@ -17,7 +16,7 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
                 parse(departureTime, TripSegment::parseString), parse(stopID, Integer::parseInt),
                 parse(stopSequence, Integer::parseInt), parse(stopHeadsign, Integer::parseInt),
                 parse(pickupType, Integer::parseInt), parse(dropOffType, Integer::parseInt),
-                parse(distTravelled, BigDecimal::new));
+                parse(distTravelled, Double::parseDouble));
     }
 
     private static LocalTime parseString(String time) {

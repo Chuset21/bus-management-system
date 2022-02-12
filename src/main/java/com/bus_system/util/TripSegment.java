@@ -36,9 +36,19 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
         return value.map(Object::toString).orElse("N/A");
     }
 
-    @Override
-    public String toString() {
-        return "Trip ID: %s, Arrival Time: %s, Departure Time: %s, Stop ID: %s, Stop Sequence: %s, Stop Headsign: %s, Pickup Type: %s, Drop Off Type: %s, Distance Travelled: %s".
+    public String toPrettyString() {
+        return ("""
+                {
+                    Trip ID: %s,
+                    Arrival Time: %s,
+                    Departure Time: %s,
+                    Stop ID: %s,
+                    Stop Sequence: %s,
+                    Stop Headsign: %s,
+                    Pickup Type: %s,
+                    Drop Off Type: %s,
+                    Distance Travelled: %s
+                }""").
                 formatted(getStringValue(tripID), getStringValue(arrivalTime), getStringValue(departureTime),
                         getStringValue(stopID), getStringValue(stopSequence), getStringValue(stopHeadsign),
                         getStringValue(pickupType), getStringValue(dropOffType), getStringValue(distTravelled));

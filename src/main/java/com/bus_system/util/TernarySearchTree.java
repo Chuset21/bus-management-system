@@ -3,6 +3,7 @@ package com.bus_system.util;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class TernarySearchTree {
     // No need for an isEnd variable, because of how the TST will be used
@@ -34,7 +35,7 @@ public class TernarySearchTree {
         if (stopName == null || stopName.isBlank() || stopId < 0) {
             return false;
         }
-        root = insert(stopName, stopId, 0, root);
+        root = insert(stopName.toLowerCase(Locale.ROOT), stopId, 0, root);
         return true;
     }
 
@@ -67,7 +68,8 @@ public class TernarySearchTree {
             return Collections.unmodifiableList(root.stopIds);
         }
 
-        return Collections.unmodifiableList(search(stopName, 0, root).stopIds);
+        final Node node = search(stopName.toLowerCase(Locale.ROOT), 0, root);
+        return node == null ? Collections.emptyList() : Collections.unmodifiableList(node.stopIds);
     }
 
     private Node search(String stopName, int index, Node node) {

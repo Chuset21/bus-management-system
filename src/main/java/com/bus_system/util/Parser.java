@@ -7,4 +7,8 @@ public class Parser {
     public static <T> Optional<T> parse(String value, Function<String, T> function) {
         return value == null || value.isBlank() ? Optional.empty() : Optional.ofNullable(function.apply(value));
     }
+
+    public static Optional<String> validate(String value) {
+        return value == null || value.isBlank() ? Optional.empty() : Optional.of(value);
+    }
 }

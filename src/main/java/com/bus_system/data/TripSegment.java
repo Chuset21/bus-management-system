@@ -6,6 +6,7 @@ import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.Optional;
 
+import static com.bus_system.util.OptionalOps.getStringValue;
 import static com.bus_system.util.Parser.parse;
 
 public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalTime, Optional<LocalTime> departureTime,
@@ -28,10 +29,6 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
         } catch (DateTimeException e) {
             return null;
         }
-    }
-
-    private static <T> String getStringValue(Optional<T> value) {
-        return value.map(Object::toString).orElse("N/A");
     }
 
     @Override

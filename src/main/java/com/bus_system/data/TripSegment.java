@@ -16,14 +16,14 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
 
     public TripSegment(String tripID, String arrivalTime, String departureTime, String stopID, String stopSequence,
                        String stopHeadsign, String pickupType, String dropOffType, String distTravelled) {
-        this(parse(tripID, Integer::parseInt), parse(arrivalTime, TripSegment::parseString),
-                parse(departureTime, TripSegment::parseString), parse(stopID, Integer::parseInt),
+        this(parse(tripID, Integer::parseInt), parse(arrivalTime, TripSegment::parseTime),
+                parse(departureTime, TripSegment::parseTime), parse(stopID, Integer::parseInt),
                 parse(stopSequence, Integer::parseInt), parse(stopHeadsign, Integer::parseInt),
                 parse(pickupType, Integer::parseInt), parse(dropOffType, Integer::parseInt),
                 parse(distTravelled, Double::parseDouble));
     }
 
-    private static LocalTime parseString(String time) {
+    private static LocalTime parseTime(String time) {
         try {
             return LocalTime.parse(time.length() != 8 ? '0' + time : time);
         } catch (DateTimeException e) {

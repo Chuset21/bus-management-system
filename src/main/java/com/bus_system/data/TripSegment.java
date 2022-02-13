@@ -1,14 +1,17 @@
 package com.bus_system.data;
 
+import com.bus_system.util.Pretty;
+
 import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.Optional;
-import java.util.function.Function;
+
+import static com.bus_system.util.Parser.parse;
 
 public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalTime, Optional<LocalTime> departureTime,
                           Optional<Integer> stopID, Optional<Integer> stopSequence, Optional<Integer> stopHeadsign,
                           Optional<Integer> pickupType, Optional<Integer> dropOffType,
-                          Optional<Double> distTravelled) {
+                          Optional<Double> distTravelled) implements Pretty {
 
     public TripSegment(String tripID, String arrivalTime, String departureTime, String stopID, String stopSequence,
                        String stopHeadsign, String pickupType, String dropOffType, String distTravelled) {
@@ -27,14 +30,11 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
         }
     }
 
-    private static <T> Optional<T> parse(String value, Function<String, T> function) {
-        return value == null || value.isBlank() ? Optional.empty() : Optional.ofNullable(function.apply(value));
-    }
-
     private static <T> String getStringValue(Optional<T> value) {
         return value.map(Object::toString).orElse("N/A");
     }
 
+    @Override
     public String toPrettyString() {
         return ("""
                 {

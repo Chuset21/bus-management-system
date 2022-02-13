@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import static com.bus_system.util.OptionalOps.getStringValue;
 import static com.bus_system.util.Parser.parse;
+import static com.bus_system.util.Parser.validate;
 
 public record BusStop(Optional<Integer> stopID, Optional<Integer> stopCode, Optional<String> stopName,
                       Optional<String> stopDescription, Optional<Double> stopLatitude, Optional<Double> stopLongitude,
@@ -14,10 +15,10 @@ public record BusStop(Optional<Integer> stopID, Optional<Integer> stopCode, Opti
 
     public BusStop(String stopID, String stopCode, String stopName, String stopDescription, String stopLatitude,
                    String stopLongitude, String zoneID, String stopUrl, String locationType, String parentStation) {
-        this(parse(stopID, Integer::parseInt), parse(stopCode, Integer::parseInt), Optional.ofNullable(stopName),
-                Optional.ofNullable(stopDescription), parse(stopLatitude, Double::parseDouble),
-                parse(stopLongitude, Double::parseDouble), Optional.ofNullable(zoneID), Optional.ofNullable(stopUrl),
-                parse(locationType, Integer::parseInt), Optional.ofNullable(parentStation));
+        this(parse(stopID, Integer::parseInt), parse(stopCode, Integer::parseInt), validate(stopName),
+                validate(stopDescription), parse(stopLatitude, Double::parseDouble),
+                parse(stopLongitude, Double::parseDouble), validate(zoneID), validate(stopUrl),
+                parse(locationType, Integer::parseInt), validate(parentStation));
     }
 
     @Override

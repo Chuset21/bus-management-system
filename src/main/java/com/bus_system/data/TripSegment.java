@@ -1,13 +1,14 @@
 package com.bus_system.data;
 
+import com.bus_system.util.Parser;
 import com.bus_system.util.Pretty;
 
-import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.Optional;
 
 import static com.bus_system.util.OptionalOps.getStringValue;
 import static com.bus_system.util.Parser.parse;
+import static com.bus_system.util.Parser.parseIfPositive;
 
 public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalTime, Optional<LocalTime> departureTime,
                           Optional<Integer> stopID, Optional<Integer> stopSequence, Optional<Integer> stopHeadsign,
@@ -16,19 +17,11 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
 
     public TripSegment(String tripID, String arrivalTime, String departureTime, String stopID, String stopSequence,
                        String stopHeadsign, String pickupType, String dropOffType, String distTravelled) {
-        this(parse(tripID, Integer::parseInt), parse(arrivalTime, TripSegment::parseTime),
-                parse(departureTime, TripSegment::parseTime), parse(stopID, Integer::parseInt),
-                parse(stopSequence, Integer::parseInt), parse(stopHeadsign, Integer::parseInt),
-                parse(pickupType, Integer::parseInt), parse(dropOffType, Integer::parseInt),
-                parse(distTravelled, Double::parseDouble));
-    }
-
-    private static LocalTime parseTime(String time) {
-        try {
-            return LocalTime.parse(time.length() != 8 ? '0' + time : time);
-        } catch (DateTimeException e) {
-            return null;
-        }
+        this(parseIfPositive(tripID, Integer::parseInt), parse(arrivalTime, Parser::parseTime),
+                parse(departureTime, Parser::parseTime), parseIfPositive(stopID, Integer::parseInt),
+                parseIfPositive(stopSequence, Integer::parseInt), parseIfPositive(stopHeadsign, Integer::parseInt),
+                parseIfPositive(pickupType, Integer::parseInt), parseIfPositive(dropOffType, Integer::parseInt),
+                parseIfPositive(distTravelled, Double::parseDouble));
     }
 
     @Override

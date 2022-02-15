@@ -18,8 +18,9 @@ public class TestGraph {
         graph.addEdge('A', 'C', 1);
 
         final String expected = """
-                A -> [Edge[source=Vertex[value=A], destination=Vertex[value=C], weight=1.0], Edge[source=Vertex[value=A], destination=Vertex[value=B], weight=2.0]]
-                C -> [Edge[source=Vertex[value=C], destination=Vertex[value=B], weight=1.0]]""";
+                A -> C with weight of 1.000
+                A -> B with weight of 2.000
+                C -> B with weight of 1.000""";
         assertEquals(expected, graph.toString(), "Graph addition not as expected");
     }
 }

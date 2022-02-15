@@ -4,9 +4,16 @@ import java.util.*;
 
 public class Graph<E> {
     private final Map<E, Set<Edge<E>>> adjacencyMap = new HashMap<>();
+    private final Set<E> vertexSet = new HashSet<>();
 
     public void addEdge(E source, E destination, double weight) {
         adjacencyMap.computeIfAbsent(source, v -> new HashSet<>()).add(new Edge<>(source, destination, weight));
+        vertexSet.add(source);
+        vertexSet.add(destination);
+    }
+
+    public Set<E> getVertexSet() {
+        return Collections.unmodifiableSet(vertexSet);
     }
 
     @Override

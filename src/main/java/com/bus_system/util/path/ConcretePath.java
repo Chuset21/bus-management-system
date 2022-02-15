@@ -1,10 +1,10 @@
-package com.bus_system.util.graph;
+package com.bus_system.util.path;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-final class ConcretePath<E> implements Path<E> {
+public class ConcretePath<E> implements Path<E> {
     private final List<E> pathTaken;
     private double totalCost;
 

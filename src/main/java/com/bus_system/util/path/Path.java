@@ -1,9 +1,9 @@
-package com.bus_system.util.graph;
+package com.bus_system.util.path;
 
 import java.util.List;
 import java.util.Optional;
 
-interface Path<E> {
+public interface Path<E> {
     Path<E> addToPath(E nodeToAdd, double costToAdd);
     Path<E> setCost(double cost);
     boolean isEmpty();

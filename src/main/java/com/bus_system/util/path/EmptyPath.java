@@ -1,10 +1,10 @@
-package com.bus_system.util.graph;
+package com.bus_system.util.path;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-class EmptyPath<E> implements Path<E>{
+public class EmptyPath<E> implements Path<E>{
     @Override
     public Path<E> addToPath(E nodeToAdd, double costToAdd) {
         final Path<E> result = new ConcretePath<>();

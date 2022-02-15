@@ -17,6 +17,7 @@ public class OptionalOps {
         return Math.signum(number.orElse(0).doubleValue()) >= 0;
     }
 
+    @SafeVarargs
     public static boolean areAllPositive(Optional<Number>... numbers) {
         return Arrays.stream(numbers).allMatch(OptionalOps::isPositive);
     }

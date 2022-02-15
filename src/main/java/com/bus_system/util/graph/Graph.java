@@ -12,7 +12,7 @@ public class Graph<E> {
 
     @Override
     public String toString() {
-        return adjacencyMap.entrySet().stream().map(e -> e.getKey().toString() + " -> " + e.getValue()).
+        return adjacencyMap.entrySet().stream().map(e -> "%s -> %s".formatted(e.getKey(), e.getValue())).
                 collect(Collectors.joining("\n"));
     }
 }

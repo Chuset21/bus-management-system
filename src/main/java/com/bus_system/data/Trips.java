@@ -34,13 +34,7 @@ public class Trips {
 
             if (tripSegment.arrivalTime().isPresent() && tripSegment.departureTime().isPresent() &&
                     tripSegment.tripID().isPresent()) {
-                this.tripSegments.compute(tripSegment.tripID().get(), (k, v) -> {
-                    if (v == null) {
-                        v = new ArrayList<>();
-                    }
-                    v.add(tripSegment);
-                    return v;
-                });
+                this.tripSegments.computeIfAbsent(tripSegment.tripID().get(), v -> new ArrayList<>()).add(tripSegment);
             }
         }
 

@@ -1,7 +1,6 @@
 package com.bus_system.util.graph;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Graph<E> {
     private final Map<E, Set<Edge<E>>> adjacencyMap = new HashMap<>();
@@ -12,7 +11,14 @@ public class Graph<E> {
 
     @Override
     public String toString() {
-        return adjacencyMap.entrySet().stream().map(e -> "%s -> %s".formatted(e.getKey(), e.getValue())).
-                collect(Collectors.joining("\n"));
+        final StringJoiner joiner = new StringJoiner("\n");
+
+        for (Map.Entry<E, Set<Edge<E>>> entry : adjacencyMap.entrySet()) {
+            for (Edge<E> e : entry.getValue()) {
+                joiner.add("%s -> %s with weight of %.3f".formatted(e.source().value(), e.destination().value(), e.weight()));
+            }
+        }
+
+        return joiner.toString();
     }
 }

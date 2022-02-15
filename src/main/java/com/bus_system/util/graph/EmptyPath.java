@@ -2,6 +2,7 @@ package com.bus_system.util.graph;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 class EmptyPath<E> implements Path<E>{
     @Override
@@ -27,7 +28,7 @@ class EmptyPath<E> implements Path<E>{
     }
 
     @Override
-    public double getTotalCost() {
-        return 0;
+    public Optional<Double> getTotalCost() {
+        return Optional.empty();
     }
 }

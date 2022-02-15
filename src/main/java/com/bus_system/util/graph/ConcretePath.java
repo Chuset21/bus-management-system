@@ -2,6 +2,7 @@ package com.bus_system.util.graph;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 final class ConcretePath<E> implements Path<E> {
     private final List<E> pathTaken;
@@ -44,7 +45,7 @@ final class ConcretePath<E> implements Path<E> {
     }
 
     @Override
-    public double getTotalCost() {
-        return totalCost;
+    public Optional<Double> getTotalCost() {
+        return Optional.of(totalCost);
     }
 }

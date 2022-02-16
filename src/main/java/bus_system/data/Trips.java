@@ -1,4 +1,4 @@
-package com.bus_system.data;
+package bus_system.data;
 
 import java.io.*;
 import java.util.*;

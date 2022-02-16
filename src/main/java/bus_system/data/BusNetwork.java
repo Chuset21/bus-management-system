@@ -1,8 +1,8 @@
-package com.bus_system.data;
+package bus_system.data;
 
-import com.bus_system.util.TernarySearchTree;
-import com.bus_system.util.graph.Graph;
-import com.bus_system.util.path.Path;
+import bus_system.util.graph.Graph;
+import bus_system.util.path.Path;
+import bus_system.util.TernarySearchTree;
 
 import java.util.ArrayList;
 import java.util.HashMap;

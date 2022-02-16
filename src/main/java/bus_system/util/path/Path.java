@@ -1,4 +1,4 @@
-package com.bus_system.util.path;
+package bus_system.util.path;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,5 +1,5 @@
-import com.bus_system.util.graph.Graph;
-import com.bus_system.util.path.Path;
+import bus_system.util.graph.Graph;
+import bus_system.util.path.Path;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

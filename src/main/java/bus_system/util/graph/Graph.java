@@ -1,8 +1,8 @@
-package com.bus_system.util.graph;
+package bus_system.util.graph;
 
-import com.bus_system.util.path.ConcretePath;
-import com.bus_system.util.path.EmptyPath;
-import com.bus_system.util.path.Path;
+import bus_system.util.path.ConcretePath;
+import bus_system.util.path.EmptyPath;
+import bus_system.util.path.Path;
 
 import java.util.*;
 

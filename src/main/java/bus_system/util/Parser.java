@@ -1,4 +1,4 @@
-package com.bus_system.util;
+package bus_system.util;
 
 import java.time.DateTimeException;
 import java.time.LocalTime;

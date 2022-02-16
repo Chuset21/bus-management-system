@@ -1,14 +1,11 @@
-package com.bus_system.data;
+package bus_system.data;
 
-import com.bus_system.util.Parser;
-import com.bus_system.util.Pretty;
+import bus_system.util.OptionalOps;
+import bus_system.util.Parser;
+import bus_system.util.Pretty;
 
 import java.time.LocalTime;
 import java.util.Optional;
-
-import static com.bus_system.util.OptionalOps.getStringValue;
-import static com.bus_system.util.Parser.parse;
-import static com.bus_system.util.Parser.parseIfPositive;
 
 public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalTime, Optional<LocalTime> departureTime,
                           Optional<Integer> stopID, Optional<Integer> stopSequence, Optional<Integer> stopHeadsign,
@@ -17,11 +14,11 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
 
     public TripSegment(String tripID, String arrivalTime, String departureTime, String stopID, String stopSequence,
                        String stopHeadsign, String pickupType, String dropOffType, String distTravelled) {
-        this(parseIfPositive(tripID, Integer::parseInt), parse(arrivalTime, Parser::parseTime),
-                parse(departureTime, Parser::parseTime), parseIfPositive(stopID, Integer::parseInt),
-                parseIfPositive(stopSequence, Integer::parseInt), parseIfPositive(stopHeadsign, Integer::parseInt),
-                parseIfPositive(pickupType, Integer::parseInt), parseIfPositive(dropOffType, Integer::parseInt),
-                parseIfPositive(distTravelled, Double::parseDouble));
+        this(Parser.parseIfPositive(tripID, Integer::parseInt), Parser.parse(arrivalTime, Parser::parseTime),
+                Parser.parse(departureTime, Parser::parseTime), Parser.parseIfPositive(stopID, Integer::parseInt),
+                Parser.parseIfPositive(stopSequence, Integer::parseInt), Parser.parseIfPositive(stopHeadsign, Integer::parseInt),
+                Parser.parseIfPositive(pickupType, Integer::parseInt), Parser.parseIfPositive(dropOffType, Integer::parseInt),
+                Parser.parseIfPositive(distTravelled, Double::parseDouble));
     }
 
     @Override
@@ -38,8 +35,8 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
                     Drop Off Type: %s,
                     Distance Travelled: %s
                 }""").
-                formatted(getStringValue(tripID), getStringValue(arrivalTime), getStringValue(departureTime),
-                        getStringValue(stopID), getStringValue(stopSequence), getStringValue(stopHeadsign),
-                        getStringValue(pickupType), getStringValue(dropOffType), getStringValue(distTravelled));
+                formatted(OptionalOps.getStringValue(tripID), OptionalOps.getStringValue(arrivalTime), OptionalOps.getStringValue(departureTime),
+                        OptionalOps.getStringValue(stopID), OptionalOps.getStringValue(stopSequence), OptionalOps.getStringValue(stopHeadsign),
+                        OptionalOps.getStringValue(pickupType), OptionalOps.getStringValue(dropOffType), OptionalOps.getStringValue(distTravelled));
     }
 }

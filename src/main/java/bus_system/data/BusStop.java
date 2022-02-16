@@ -1,11 +1,11 @@
-package com.bus_system.data;
+package bus_system.data;
 
-import com.bus_system.util.Pretty;
+import bus_system.util.OptionalOps;
+import bus_system.util.Pretty;
 
 import java.util.Optional;
 
-import static com.bus_system.util.OptionalOps.getStringValue;
-import static com.bus_system.util.Parser.*;
+import static bus_system.util.Parser.*;
 
 public record BusStop(Optional<Integer> stopID, Optional<Integer> stopCode, Optional<String> stopName,
                       Optional<String> stopDescription, Optional<Double> stopLatitude, Optional<Double> stopLongitude,
@@ -35,9 +35,9 @@ public record BusStop(Optional<Integer> stopID, Optional<Integer> stopCode, Opti
                     Location Type: %s,
                     Parent station: %s
                 }""").
-                formatted(getStringValue(stopID), getStringValue(stopCode), getStringValue(stopName),
-                        getStringValue(stopDescription), getStringValue(stopLatitude), getStringValue(stopLongitude),
-                        getStringValue(zoneID), getStringValue(stopUrl), getStringValue(locationType),
-                        getStringValue(parentStation));
+                formatted(OptionalOps.getStringValue(stopID), OptionalOps.getStringValue(stopCode), OptionalOps.getStringValue(stopName),
+                        OptionalOps.getStringValue(stopDescription), OptionalOps.getStringValue(stopLatitude), OptionalOps.getStringValue(stopLongitude),
+                        OptionalOps.getStringValue(zoneID), OptionalOps.getStringValue(stopUrl), OptionalOps.getStringValue(locationType),
+                        OptionalOps.getStringValue(parentStation));
     }
 }

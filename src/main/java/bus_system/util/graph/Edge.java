@@ -1,4 +1,4 @@
-package com.bus_system.util.graph;
+package bus_system.util.graph;
 
 record Edge<E>(E source, E destination, double weight) implements Comparable<Edge<E>> {
 

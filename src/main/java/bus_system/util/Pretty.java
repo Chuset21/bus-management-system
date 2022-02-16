@@ -1,4 +1,4 @@
-package com.bus_system.util;
+package bus_system.util;
 
 public interface Pretty {
     String toPrettyString();

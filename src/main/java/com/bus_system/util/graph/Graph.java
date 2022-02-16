@@ -35,6 +35,10 @@ public class Graph<E> {
         }
     }
 
+    public boolean containsVertex(E vertex) {
+        return vertexSet.contains(vertex);
+    }
+
     public Set<E> getVertexSet() {
         return Collections.unmodifiableSet(vertexSet);
     }

@@ -14,23 +14,18 @@ public class ConcretePath<E> implements Path<E> {
     }
 
     @Override
-    public Path<E> addToPath(E nodeToAdd, double costToAdd) {
-        addNode(nodeToAdd);
-        addCost(costToAdd);
+    public Path<E> prependToPath(E nodeToAdd) {
+        prependNode(nodeToAdd);
         return this;
     }
 
-    private void addNode(E nodeToAdd) {
-        pathTaken.add(nodeToAdd);
+    private void prependNode(E node) {
+        pathTaken.add(0, node);
     }
 
     @Override
     public boolean isEmpty() {
         return pathTaken.isEmpty();
-    }
-
-    private void addCost(double costToAdd) {
-        totalCost += totalCost;
     }
 
     @Override

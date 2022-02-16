@@ -6,9 +6,9 @@ import java.util.Optional;
 
 public class EmptyPath<E> implements Path<E>{
     @Override
-    public Path<E> addToPath(E nodeToAdd, double costToAdd) {
+    public Path<E> prependToPath(E nodeToAdd) {
         final Path<E> result = new ConcretePath<>();
-        return result.addToPath(nodeToAdd, costToAdd);
+        return result.prependToPath(nodeToAdd);
     }
 
     @Override

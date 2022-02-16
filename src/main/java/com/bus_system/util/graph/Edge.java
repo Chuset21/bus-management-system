@@ -1,9 +1,6 @@
 package com.bus_system.util.graph;
 
-record Edge<E>(Vertex<E> source, Vertex<E> destination, double weight) implements Comparable<Edge<E>> {
-    public Edge(E sourceValue, E destValue, double weight) {
-        this(new Vertex<>(sourceValue), new Vertex<>(destValue), weight);
-    }
+record Edge<E>(E source, E destination, double weight) implements Comparable<Edge<E>> {
 
     @Override
     public int compareTo(Edge<E> o) {

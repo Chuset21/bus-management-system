@@ -1,5 +1,7 @@
 package com.bus_system.util.graph;
 
+import com.bus_system.util.path.Path;
+
 import java.util.*;
 
 public class Graph<E> {
@@ -22,7 +24,7 @@ public class Graph<E> {
 
         for (Map.Entry<E, Set<Edge<E>>> entry : adjacencyMap.entrySet()) {
             for (Edge<E> e : entry.getValue()) {
-                joiner.add("%s -> %s with weight of %.3f".formatted(e.source().value(), e.destination().value(), e.weight()));
+                joiner.add("%s -> %s with weight of %.3f".formatted(e.source(), e.destination(), e.weight()));
             }
         }
 

@@ -7,32 +7,13 @@ import bus_system.util.path.Path;
 import java.util.*;
 
 public class Graph<E> {
-    private final Map<E, Set<Edge<E>>> adjacencyMap = new HashMap<>();
+    private final Map<E, Set<Connection<E>>> adjacencyMap = new HashMap<>();
     private final Set<E> vertexSet = new HashSet<>();
 
     public void addEdge(E source, E destination, double weight) {
-        adjacencyMap.computeIfAbsent(source, v -> new HashSet<>()).add(new Edge<>(source, destination, weight));
+        adjacencyMap.computeIfAbsent(source, v -> new HashSet<>()).add(new Connection<>(destination, weight));
         vertexSet.add(source);
         vertexSet.add(destination);
-    }
-
-    private static class Node<E> implements Comparator<Node<E>> {
-        public final E prev;
-        public final double cost;
-
-        public Node() {
-            this(null, -1);
-        }
-
-        public Node(E prev, double cost) {
-            this.prev = prev;
-            this.cost = cost;
-        }
-
-        @Override
-        public int compare(Node<E> node1, Node<E> node2) {
-            return Double.compare(node1.cost, node2.cost);
-        }
     }
 
     public boolean containsVertex(E vertex) {
@@ -48,7 +29,7 @@ public class Graph<E> {
             return new EmptyPath<>();
         }
 
-        final Map<E, Node<E>> nodeMap = dijkstra(source);
+        final Map<E, Connection<E>> nodeMap = dijkstra(source);
         if (!nodeMap.containsKey(destination)) {
             return new EmptyPath<>();
         }
@@ -56,64 +37,61 @@ public class Graph<E> {
         return buildPath(source, destination, nodeMap);
     }
 
-    private Path<E> buildPath(E source, E destination, Map<E, Node<E>> nodeMap) {
+    private Path<E> buildPath(E source, E destination, Map<E, Connection<E>> nodeMap) {
         final Path<E> result = new ConcretePath<>();
 
         E current = destination;
         while (!source.equals(current)) {
             result.prependToPath(current);
-            Node<E> node = nodeMap.get(current);
+            Connection<E> node = nodeMap.get(current);
             if (node == null) {
                 return new EmptyPath<>();
             }
-            current = node.prev;
+            current = node.connection();
         }
 
-        return result.prependToPath(source).setCost(nodeMap.get(destination).cost);
+        return result.prependToPath(source).setCost(nodeMap.get(destination).weight());
     }
 
-    private Map<E, Node<E>> dijkstra(E source) {
+    private Map<E, Connection<E>> dijkstra(E source) {
         final Set<E> knownSet = new HashSet<>(vertexSet.size());
-        final Map<E, Node<E>> nodeMap = new HashMap<>(vertexSet.size());
-        final Queue<Node<E>> priorityQueue = new PriorityQueue<>(vertexSet.size(), new Node<>());
+        final Map<E, Connection<E>> connectionMap = new HashMap<>(vertexSet.size());
+        final Queue<Connection<E>> priorityQueue = new PriorityQueue<>(vertexSet.size(), new Connection<>());
 
         if (!adjacencyMap.containsKey(source)) {  // If the source doesn't have any edges
-            return nodeMap;
+            return connectionMap;
         }
 
         for (E vertex : vertexSet) {
-            nodeMap.put(vertex, new Node<>(null, Double.POSITIVE_INFINITY));
+            connectionMap.put(vertex, new Connection<>(null, Double.POSITIVE_INFINITY));
         }
-        nodeMap.put(source, new Node<>(null, 0d));
-        priorityQueue.add(new Node<>(source, 0d));
+        connectionMap.put(source, new Connection<>(null, 0d));
+        priorityQueue.add(new Connection<>(source, 0d));
 
         while (knownSet.size() != vertexSet.size() && !priorityQueue.isEmpty()) {
-            final E val = priorityQueue.remove().prev;
+            final E value = priorityQueue.remove().connection();
 
-            if (!knownSet.contains(val)) {
-                knownSet.add(val);
-                processNeighbours(val, knownSet, nodeMap, priorityQueue);
+            if (!knownSet.contains(value)) {
+                knownSet.add(value);
+                processNeighbours(value, knownSet, connectionMap, priorityQueue);
             }
         }
 
-        return nodeMap;
+        return connectionMap;
     }
 
-    private void processNeighbours(E value, Set<E> knownSet, Map<E, Node<E>> nodeMap, Queue<Node<E>> queue) {
-        double edgeDistance;
-        double newDistance;
+    private void processNeighbours(E value, Set<E> knownSet, Map<E, Connection<E>> nodeMap, Queue<Connection<E>> queue) {
+        final Set<Connection<E>> connections = adjacencyMap.getOrDefault(value, Collections.emptySet());
+        for (Connection<E> connection : connections) {
+            if (!knownSet.contains(connection.connection())) {
+                final double edgeDistance = connection.weight();
+                final double newDistance = nodeMap.get(value).weight() + edgeDistance;
 
-        final Set<Edge<E>> edges = adjacencyMap.getOrDefault(value, Collections.emptySet());
-        for (Edge<E> edge : edges) {
-            if (!knownSet.contains(edge.destination())) {
-                edgeDistance = edge.weight();
-                newDistance = nodeMap.get(value).cost + edgeDistance;
-
-                if (newDistance < nodeMap.get(edge.destination()).cost) {
-                    nodeMap.put(edge.destination(), new Node<>(edge.source(), newDistance));
+                if (newDistance < nodeMap.get(connection.connection()).weight()) {
+                    nodeMap.put(connection.connection(), new Connection<>(value, newDistance));
                 }
 
-                queue.add(new Node<>(edge.destination(), nodeMap.get(edge.destination()).cost));
+                queue.add(new Connection<>(connection.connection(), nodeMap.get(connection.connection()).weight()));
             }
         }
     }
@@ -122,9 +100,9 @@ public class Graph<E> {
     public String toString() {
         final StringJoiner joiner = new StringJoiner("\n");
 
-        for (Map.Entry<E, Set<Edge<E>>> entry : adjacencyMap.entrySet()) {
-            for (Edge<E> e : entry.getValue()) {
-                joiner.add("%s -> %s with weight of %.3f".formatted(e.source(), e.destination(), e.weight()));
+        for (Map.Entry<E, Set<Connection<E>>> entry : adjacencyMap.entrySet()) {
+            for (Connection<E> c : entry.getValue()) {
+                joiner.add("%s -> %s with weight of %.3f".formatted(entry.getKey(), c.connection(), c.weight()));
             }
         }
 

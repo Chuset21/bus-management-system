@@ -3,8 +3,7 @@ package bus_system.data;
 import java.io.*;
 import java.util.*;
 
-public class Trips {
-
+final class Trips {
     private static final Comparator<TripSegment> TRIP_SEGMENT_COMPARABLE = (o1, o2) -> {
         if (o1.arrivalTime().isEmpty()) {
             return o2.arrivalTime().isEmpty() ? 0 : -1;
@@ -39,6 +38,10 @@ public class Trips {
         }
 
         reader.close();
+    }
+
+    Map<Integer, List<TripSegment>> getTripSegments() {
+        return Collections.unmodifiableMap(tripSegments);
     }
 
     public List<TripSegment> searchByArrivalTime(String arrivalTime) {

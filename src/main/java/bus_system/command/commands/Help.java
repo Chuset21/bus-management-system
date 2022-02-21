@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Help implements Command {
-    public final static List<String> ALIASES = List.of("--help", "-h");
+    public final static List<String> ALIASES = List.of("-?", "-h", "--help");
 
     @Override
     public void execute(String... strings) {
@@ -18,7 +18,7 @@ public class Help implements Command {
     @Override
     public String getDescription() {
         return """
-                    help    %s    Available commands:%s
+                    help    %s      Available commands:%s
                 """.formatted(ALIASES,
                 new HashSet<>(CommandExecutor.getCommands().values()).stream().
                         filter(command -> !(command instanceof Help)).

@@ -1,5 +1,6 @@
 package bus_system.command;
 
+import bus_system.command.ansi.ConsoleColors;
 import bus_system.command.commands.Help;
 
 import java.util.Collections;
@@ -7,12 +8,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class CommandExecutor {
+    private static final String ERROR_MESSAGE = ConsoleColors.RED_BOLD + "Error, please provide a valid command.\n" +
+                                                ConsoleColors.RESET + "To see all valid commands try "
+                                                + ConsoleColors.YELLOW_BOLD + "'--help'" + ConsoleColors.RESET;
+
+    private static final Map<String, Command> COMMANDS;
+
     // Suppresses default constructor, ensuring non-instantiability.
     private CommandExecutor() {
 
     }
-
-    private static final Map<String, Command> COMMANDS;
 
     static {
         COMMANDS = new HashMap<>();
@@ -28,7 +33,7 @@ public final class CommandExecutor {
     public static void execute(String commandName, String... args) {
         final Command command = COMMANDS.get(commandName);
         if (command == null) {
-            System.err.println("Please provide a valid command.\nFor more information try '--help'.");
+            System.out.println(ERROR_MESSAGE);
         } else {
             try {
                 command.execute(args);
@@ -36,5 +41,12 @@ public final class CommandExecutor {
                 System.err.println(e.getMessage());
             }
         }
+    }
+}
+
+class Test {
+    public static void main(String[] args) {
+        CommandExecutor.execute("-h");
+        CommandExecutor.execute("8");
     }
 }

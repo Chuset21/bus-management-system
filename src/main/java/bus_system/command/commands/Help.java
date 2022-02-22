@@ -8,22 +8,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Help implements Command {
+public final class Help implements Command {
     public final static List<String> ALIASES = List.of("-?", "-h", "--help");
 
     @Override
     public void execute(String... strings) {
-        System.out.println(getDescription());
+        System.out.print(getDescription());
     }
 
     @Override
     public String getDescription() {
         return """
-                    help    %s%s%s      Available commands:%s
+                %s
+                
+                    help    %s      %s%s
                 """.formatted(
-                ConsoleColors.YELLOW_BOLD,
-                ALIASES,
-                ConsoleColors.RESET,
+                ConsoleColors.colorize(ConsoleColors.GREEN_BOLD, "Available commands:"),
+                ConsoleColors.colorize(ConsoleColors.YELLOW_BOLD, ALIASES.toString()),
+                ConsoleColors.colorize(ConsoleColors.CYAN, "Lists all possible commands."),
                 new HashSet<>(CommandExecutor.getCommands().values()).stream().
                         filter(command -> !(command instanceof Help)).
                         map(command -> "\n\n" + command.getDescription()).

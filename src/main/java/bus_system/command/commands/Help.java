@@ -2,6 +2,7 @@ package bus_system.command.commands;
 
 import bus_system.command.Command;
 import bus_system.command.CommandExecutor;
+import bus_system.command.ansi.ConsoleColors;
 
 import java.util.HashSet;
 import java.util.List;
@@ -18,8 +19,11 @@ public class Help implements Command {
     @Override
     public String getDescription() {
         return """
-                    help    %s      Available commands:%s
-                """.formatted(ALIASES,
+                    help    %s%s%s      Available commands:%s
+                """.formatted(
+                ConsoleColors.YELLOW_BOLD,
+                ALIASES,
+                ConsoleColors.RESET,
                 new HashSet<>(CommandExecutor.getCommands().values()).stream().
                         filter(command -> !(command instanceof Help)).
                         map(command -> "\n\n" + command.getDescription()).

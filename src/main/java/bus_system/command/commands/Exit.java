@@ -1,7 +1,7 @@
 package bus_system.command.commands;
 
 import bus_system.command.Command;
-import bus_system.command.ansi.ConsoleColors;
+import bus_system.command.ansi.ConsoleColor;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public final class Exit implements Command {
     @Override
     public void execute(String... strings) {
         System.out.printf(
-                "%s%n", ConsoleColors.colorize(ConsoleColors.WHITE_BRIGHT, "Thank you for using this program!"));
+                "%s%n", ConsoleColor.colorize(ConsoleColor.WHITE_BRIGHT, "Thank you for using this program!"));
         System.exit(0);
     }
 
@@ -20,7 +20,7 @@ public final class Exit implements Command {
         return """
                     exit    %s          %s
                 """.formatted(
-                ConsoleColors.colorize(ConsoleColors.YELLOW_BOLD, ALIASES.toString()),
-                ConsoleColors.colorize(ConsoleColors.CYAN, "Exits the program."));
+                ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
+                ConsoleColor.colorize(ConsoleColor.CYAN, "Exits the program."));
     }
 }

@@ -1,6 +1,6 @@
 package bus_system.command;
 
-import bus_system.command.ansi.ConsoleColors;
+import bus_system.command.ansi.ConsoleColor;
 import bus_system.command.commands.Exit;
 import bus_system.command.commands.Help;
 
@@ -9,9 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class CommandExecutor {
-    private static final String ERROR_MESSAGE = ConsoleColors.colorize(ConsoleColors.RED_BOLD, "Error, please provide a valid command.\n") +
-                                                "To see all valid commands try " +
-                                                ConsoleColors.colorize(ConsoleColors.YELLOW_BOLD, "'--help'\n");
+    private static final String ERROR_MESSAGE =
+            ConsoleColor.colorize(ConsoleColor.RED_BOLD, "Error, please provide a valid command.\n") +
+            "To see all valid commands try " +
+            ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, "'--help'\n");
 
     private static final Map<String, Command> COMMANDS;
 

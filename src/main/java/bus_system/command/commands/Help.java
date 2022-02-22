@@ -2,7 +2,7 @@ package bus_system.command.commands;
 
 import bus_system.command.Command;
 import bus_system.command.CommandExecutor;
-import bus_system.command.ansi.ConsoleColors;
+import bus_system.command.ansi.ConsoleColor;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,9 +23,9 @@ public final class Help implements Command {
                 
                     help    %s      %s%s
                 """.formatted(
-                ConsoleColors.colorize(ConsoleColors.GREEN_BOLD, "Available commands:"),
-                ConsoleColors.colorize(ConsoleColors.YELLOW_BOLD, ALIASES.toString()),
-                ConsoleColors.colorize(ConsoleColors.CYAN, "Lists all possible commands."),
+                ConsoleColor.colorize(ConsoleColor.GREEN_BOLD, "Available commands:"),
+                ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
+                ConsoleColor.colorize(ConsoleColor.CYAN, "Lists all possible commands."),
                 new HashSet<>(CommandExecutor.getCommands().values()).stream().
                         filter(command -> !(command instanceof Help)).
                         map(command -> "\n\n" + command.getDescription()).

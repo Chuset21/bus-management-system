@@ -80,9 +80,11 @@ public class BusNetwork {
     }
 
     private String moveInfo(String input) {
-        final String substring = input.substring(0, 2).trim().toLowerCase(Locale.ROOT);
+        final String substring = input.substring(0, 2).trim();
+        final String lowerCaseSub = substring.toLowerCase(Locale.ROOT);
 
-        if (substring.equals("eb") || substring.equals("sb") || substring.equals("nb") || substring.equals("wb")) {
+        if (lowerCaseSub.equals("eb") || lowerCaseSub.equals("sb") ||
+            lowerCaseSub.equals("nb") || lowerCaseSub.equals("wb")) {
             return input.substring(3).trim() + " " + substring;
         }
 

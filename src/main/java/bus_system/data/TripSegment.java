@@ -1,8 +1,8 @@
 package bus_system.data;
 
+import bus_system.command.ansi.ConsoleColor;
 import bus_system.util.OptionalOps;
 import bus_system.util.Parser;
-import bus_system.util.Pretty;
 
 import java.time.LocalTime;
 import java.util.Optional;
@@ -10,7 +10,7 @@ import java.util.Optional;
 public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalTime, Optional<LocalTime> departureTime,
                           Optional<Integer> stopID, Optional<Integer> stopSequence, Optional<Integer> stopHeadsign,
                           Optional<Integer> pickupType, Optional<Integer> dropOffType,
-                          Optional<Double> distTravelled) implements Pretty {
+                          Optional<Double> distTravelled) {
 
     public TripSegment(String tripID, String arrivalTime, String departureTime, String stopID, String stopSequence,
                        String stopHeadsign, String pickupType, String dropOffType, String distTravelled) {
@@ -22,7 +22,7 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
     }
 
     @Override
-    public String toPrettyString() {
+    public String toString() {
         return ("""
                 {
                     Trip ID: %s,
@@ -35,8 +35,14 @@ public record TripSegment(Optional<Integer> tripID, Optional<LocalTime> arrivalT
                     Drop Off Type: %s,
                     Distance Travelled: %s
                 }""").
-                formatted(OptionalOps.getStringValue(tripID), OptionalOps.getStringValue(arrivalTime), OptionalOps.getStringValue(departureTime),
-                        OptionalOps.getStringValue(stopID), OptionalOps.getStringValue(stopSequence), OptionalOps.getStringValue(stopHeadsign),
-                        OptionalOps.getStringValue(pickupType), OptionalOps.getStringValue(dropOffType), OptionalOps.getStringValue(distTravelled));
+                formatted(ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(tripID)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(arrivalTime)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(departureTime)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(stopID)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(stopSequence)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(stopHeadsign)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(pickupType)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(dropOffType)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(distTravelled)));
     }
 }

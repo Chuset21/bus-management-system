@@ -16,8 +16,8 @@ public final class CommandExecutor {
 
     static {
         try {
-            BUS_NETWORK = new BusNetwork("src/main/resources/stop_times.txt",
-                    "src/main/resources/stops.txt", "src/main/resources/transfers.txt");
+            BUS_NETWORK = new BusNetwork("stop_times.txt",
+                    "stops.txt", "transfers.txt");
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to load bus network.");

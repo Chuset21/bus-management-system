@@ -24,7 +24,8 @@ final class Trips {
     }
 
     private void getDataFromFile(String filePath) throws IOException {
-        final BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        final BufferedReader reader = new BufferedReader(new FileReader(Objects.requireNonNull(
+                getClass().getClassLoader().getResource(filePath)).getFile()));
 
         // Skip the first line containing the names of each value
         reader.readLine();

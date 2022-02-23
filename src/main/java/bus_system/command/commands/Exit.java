@@ -17,9 +17,7 @@ public final class Exit implements Command {
 
     @Override
     public String getDescription() {
-        return """
-                    exit    %s          %s
-                """.formatted(
+        return "\texit    %s          %s".formatted(
                 ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
                 ConsoleColor.colorize(ConsoleColor.CYAN, "Exits the program."));
     }

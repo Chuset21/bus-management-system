@@ -8,7 +8,7 @@ import bus_system.data.BusStop;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SearchBusStops implements Command {
+public final class SearchBusStops implements Command {
     public final static List<String> ALIASES = List.of("ss", "search-stops");
 
     @Override

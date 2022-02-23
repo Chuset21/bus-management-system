@@ -3,7 +3,10 @@ package bus_system.command;
 import bus_system.command.ansi.ConsoleColor;
 import bus_system.command.commands.Exit;
 import bus_system.command.commands.Help;
+import bus_system.command.commands.ShortestPath;
+import bus_system.data.BusNetwork;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,13 +16,19 @@ public final class CommandExecutor {
             ConsoleColor.colorize(ConsoleColor.RED_BOLD, "Error, please provide a valid command.\n") +
             "To see all valid commands try " +
             ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, "'--help'\n");
+    public static final BusNetwork BUS_NETWORK;
+
+    static {
+        try {
+            BUS_NETWORK = new BusNetwork("src/main/resources/stop_times.txt",
+                    "src/main/resources/stops.txt", "src/main/resources/transfers.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to load bus network.");
+        }
+    }
 
     private static final Map<String, Command> COMMANDS;
-
-    // Suppresses default constructor, ensuring non-instantiability.
-    private CommandExecutor() {
-
-    }
 
     static {
         COMMANDS = new HashMap<>();
@@ -29,6 +38,14 @@ public final class CommandExecutor {
 
         final Exit exit = new Exit();
         Exit.ALIASES.forEach(a -> COMMANDS.put(a, exit));
+
+        final ShortestPath shortestPath = new ShortestPath();
+        ShortestPath.ALIASES.forEach(a -> COMMANDS.put(a, shortestPath));
+    }
+
+    // Suppresses default constructor, ensuring non-instantiability.
+    private CommandExecutor() {
+
     }
 
     public static Map<String, Command> getCommands() {
@@ -43,7 +60,7 @@ public final class CommandExecutor {
             try {
                 command.execute(args);
             } catch (Exception e) {  // This is how errors will be handled
-                System.err.println(e.getMessage());
+                System.out.println(ConsoleColor.colorize(ConsoleColor.RED_BOLD, e.getMessage()));
             }
         }
     }
@@ -53,6 +70,7 @@ class Test {
     public static void main(String[] args) {
         CommandExecutor.execute("-h");
         CommandExecutor.execute("8");
+        CommandExecutor.execute("-sp", "-1", "2");
         CommandExecutor.execute("-e");
     }
 }

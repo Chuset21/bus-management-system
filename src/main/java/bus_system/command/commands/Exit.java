@@ -9,10 +9,10 @@ public final class Exit implements Command {
     public final static List<String> ALIASES = List.of("e", "exit");
 
     @Override
-    public void execute(String... strings) {
+    public int execute(String... strings) {
         System.out.printf(
                 "%s%n", ConsoleColor.colorize(ConsoleColor.WHITE_BRIGHT, "Thank you for using this program!"));
-        System.exit(0);
+        return 1;
     }
 
     @Override

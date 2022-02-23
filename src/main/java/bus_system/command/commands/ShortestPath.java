@@ -10,7 +10,7 @@ public final class ShortestPath implements Command {
     public final static List<String> ALIASES = List.of("sp", "shortest-path");
 
     @Override
-    public void execute(String... strings) {  // TODO Implement fully
+    public int execute(String... strings) {  // TODO Implement fully
         if (strings.length != 2) {
             throw new IllegalArgumentException("Error, please pass exactly 2 stop numbers.");
         }
@@ -29,6 +29,8 @@ public final class ShortestPath implements Command {
         } else if (!CommandExecutor.BUS_NETWORK.containsStop(destStop)) {
             throw new IllegalArgumentException("Destination stop '%d' doesn't exist in the bus network.".formatted(destStop));
         }
+
+        return 0;
     }
 
     @Override

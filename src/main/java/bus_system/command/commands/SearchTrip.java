@@ -8,8 +8,8 @@ public class SearchTrip implements Command {
     public final static List<String> ALIASES = List.of("st", "search-trip");
 
     @Override
-    public void execute(String... strings) {  // TODO Implement
-
+    public int execute(String... strings) {  // TODO Implement
+        return 0;
     }
 
 

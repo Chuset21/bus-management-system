@@ -52,17 +52,18 @@ public final class CommandExecutor {
         return Collections.unmodifiableMap(COMMANDS);
     }
 
-    public static void execute(String commandName, String... args) {
+    public static int execute(String commandName, String... args) {
         final Command command = COMMANDS.get(commandName);
         if (command == null) {
             System.out.println(ERROR_MESSAGE);
         } else {
             try {
-                command.execute(args);
+                return command.execute(args);
             } catch (Exception e) {  // This is how errors will be handled
                 System.out.println(ConsoleColor.colorize(ConsoleColor.RED_BOLD, e.getMessage()));
             }
         }
+        return 0;
     }
 }
 
@@ -71,6 +72,9 @@ class Test {
         CommandExecutor.execute("h");
         CommandExecutor.execute("8");
         CommandExecutor.execute("sp", "-1", "2");
-        CommandExecutor.execute("e");
+
+        if (CommandExecutor.execute("e") != 0) {
+            System.exit(0);
+        }
     }
 }

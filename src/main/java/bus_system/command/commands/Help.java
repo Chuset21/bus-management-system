@@ -12,8 +12,9 @@ public final class Help implements Command {
     public final static List<String> ALIASES = List.of("?", "h", "help");
 
     @Override
-    public void execute(String... strings) {
+    public int execute(String... strings) {
         System.out.print(getDescription());
+        return 0;
     }
 
     @Override

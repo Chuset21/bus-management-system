@@ -24,34 +24,32 @@ public final class CommandExecutor {
         }
     }
 
-    private static final Map<String, Command> COMMANDS;
-
-    static {
-        COMMANDS = new HashMap<>();
-
-        final Help help = new Help();
-        Help.ALIASES.forEach(a -> COMMANDS.put(a, help));
-
-        final Exit exit = new Exit();
-        Exit.ALIASES.forEach(a -> COMMANDS.put(a, exit));
-
-        final ShortestPath shortestPath = new ShortestPath();
-        ShortestPath.ALIASES.forEach(a -> COMMANDS.put(a, shortestPath));
-
-        final SearchTrips searchTrips = new SearchTrips();
-        SearchTrips.ALIASES.forEach(a -> COMMANDS.put(a, searchTrips));
-
-        final SearchBusStops searchBusStops = new SearchBusStops();
-        SearchBusStops.ALIASES.forEach(a -> COMMANDS.put(a, searchBusStops));
-    }
+    public static final Map<String, Command> COMMANDS = initializeCommands();
 
     // Suppresses default constructor, ensuring non-instantiability.
     private CommandExecutor() {
 
     }
 
-    public static Map<String, Command> getCommands() {
-        return Collections.unmodifiableMap(COMMANDS);
+    private static Map<String, Command> initializeCommands() {
+        Map<String, Command> result = new LinkedHashMap<>();
+
+        final Help help = new Help();
+        Help.ALIASES.forEach(a -> result.put(a, help));
+
+        final Exit exit = new Exit();
+        Exit.ALIASES.forEach(a -> result.put(a, exit));
+
+        final ShortestPath shortestPath = new ShortestPath();
+        ShortestPath.ALIASES.forEach(a -> result.put(a, shortestPath));
+
+        final SearchTrips searchTrips = new SearchTrips();
+        SearchTrips.ALIASES.forEach(a -> result.put(a, searchTrips));
+
+        final SearchBusStops searchBusStops = new SearchBusStops();
+        SearchBusStops.ALIASES.forEach(a -> result.put(a, searchBusStops));
+
+        return Collections.unmodifiableMap(result);
     }
 
     public static int execute(String commandName, String... args) {

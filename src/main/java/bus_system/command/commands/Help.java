@@ -4,7 +4,6 @@ import bus_system.command.Command;
 import bus_system.command.CommandExecutor;
 import bus_system.command.ansi.ConsoleColor;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +20,7 @@ public final class Help implements Command {
     public String getDescription() {
         return """
                 %s
-                
+                                
                     help    %s      %s
                     
                 %s
@@ -29,7 +28,7 @@ public final class Help implements Command {
                 ConsoleColor.colorize(ConsoleColor.GREEN_BOLD, "Available commands:"),
                 ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
                 ConsoleColor.colorize(ConsoleColor.CYAN, "Lists all possible commands."),
-                new HashSet<>(CommandExecutor.getCommands().values()).stream().
+                CommandExecutor.COMMANDS.values().stream().distinct().
                         filter(command -> !(command instanceof Help)).
                         map(Command::getDescription).
                         collect(Collectors.joining("\n\n")));

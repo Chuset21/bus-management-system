@@ -91,8 +91,12 @@ public class BusNetwork {
         return input;
     }
 
-    public List<TripSegment> searchByArrivalTime(String arrivalTime) {
+    public List<List<TripSegment>> searchByArrivalTime(String arrivalTime) {
         return trips.searchByArrivalTime(arrivalTime);
+    }
+
+    public String findArrivalTimeTrips(String arrivalTime) {
+        return trips.findArrivalTimeTrips(arrivalTime);
     }
 
     public Path<BusStop> getShortestPath(BusStop fromStop, BusStop toStop) {

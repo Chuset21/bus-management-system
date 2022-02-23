@@ -1,5 +1,7 @@
 package bus_system.util.path;
 
+import bus_system.command.ansi.ConsoleColor;
+
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,7 +54,7 @@ public class ConcretePath<E> implements Path<E> {
         return ("""
                 Path taken, with a total distance of %s:
                 %s""").formatted(
-                formatter.format(totalCost),
+                ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, formatter.format(totalCost)),
                 getPathTaken().stream().map(Object::toString).collect(Collectors.joining(",\n")));
     }
 }

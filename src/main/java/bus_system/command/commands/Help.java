@@ -22,14 +22,16 @@ public final class Help implements Command {
         return """
                 %s
                 
-                    help    %s      %s%s
+                    help    %s      %s
+                    
+                %s
                 """.formatted(
                 ConsoleColor.colorize(ConsoleColor.GREEN_BOLD, "Available commands:"),
                 ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
                 ConsoleColor.colorize(ConsoleColor.CYAN, "Lists all possible commands."),
                 new HashSet<>(CommandExecutor.getCommands().values()).stream().
                         filter(command -> !(command instanceof Help)).
-                        map(command -> "\n\n" + command.getDescription()).
-                        collect(Collectors.joining()));
+                        map(Command::getDescription).
+                        collect(Collectors.joining("\n\n")));
     }
 }

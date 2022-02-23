@@ -17,7 +17,7 @@ public final class SearchBusStops implements Command {
                         Full Name:      %s
                         Partial Name:   %s
                         Empty Name:     %s""".formatted(
-            ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
+            ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, ALIASES.toString()),
             ConsoleColor.colorize(ConsoleColor.CYAN,
                     "Searches for bus stops matching a given starting portion of the name, ignores casing."),
             ConsoleColor.colorize(ConsoleColor.PURPLE_BRIGHT, "<stop name portion>"),

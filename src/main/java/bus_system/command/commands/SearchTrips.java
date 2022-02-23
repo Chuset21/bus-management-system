@@ -15,7 +15,7 @@ public final class SearchTrips implements Command {
             \t\tExamples:
                         Full format:        %s
                         Partial format:     %s""".formatted(
-            ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
+            ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, ALIASES.toString()),
             ConsoleColor.colorize(ConsoleColor.CYAN,
                     "Searches for all trips with a given arrival time, returning full details of all trips matching the criteria."),
             ConsoleColor.colorize(ConsoleColor.PURPLE_BRIGHT, "<arrival time> in the format 'hh:mm:ss'"),

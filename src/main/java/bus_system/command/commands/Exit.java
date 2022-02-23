@@ -8,7 +8,7 @@ import java.util.List;
 public final class Exit implements Command {
     public final static List<String> ALIASES = List.of("e", "exit");
     public static final String DESCRIPTION = "\texit    %s          %s".formatted(
-            ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
+            ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, ALIASES.toString()),
             ConsoleColor.colorize(ConsoleColor.CYAN, "Exits the program."));
 
     @Override

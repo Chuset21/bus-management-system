@@ -28,7 +28,7 @@ public final class Help implements Command {
                     %s
                     """.formatted(
                     ConsoleColor.colorize(ConsoleColor.GREEN_BOLD, "Available commands:"),
-                    ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
+                    ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, ALIASES.toString()),
                     ConsoleColor.colorize(ConsoleColor.CYAN, "Lists all possible commands."),
                     CommandExecutor.COMMANDS.values().stream().distinct().
                             filter(command -> !(command instanceof Help)).

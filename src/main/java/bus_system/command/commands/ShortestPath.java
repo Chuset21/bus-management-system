@@ -14,14 +14,14 @@ public final class ShortestPath implements Command {
                 shortest path   %s      %s
                     Arguments:  %s
             \t\tExample:    %s""".formatted(
-            ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
+            ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, ALIASES.toString()),
             ConsoleColor.colorize(ConsoleColor.CYAN, "Finds the shortest path between two given stops."),
             ConsoleColor.colorize(ConsoleColor.PURPLE_BRIGHT, "<source stop>  <destination stop>"),
             ConsoleColor.colorize(ConsoleColor.BLUE_BRIGHT, ALIASES.get(ALIASES.size() - 1) + " 646 379")
     );
 
     @Override
-    public int execute(String... strings) {  // TODO Implement fully
+    public int execute(String... strings) {
         if (strings.length != 2) {
             throw new IllegalArgumentException("Error, please pass exactly 2 stop numbers.");
         }

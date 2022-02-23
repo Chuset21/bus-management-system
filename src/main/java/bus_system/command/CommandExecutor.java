@@ -7,9 +7,7 @@ import bus_system.command.commands.ShortestPath;
 import bus_system.data.BusNetwork;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public final class CommandExecutor {
     private static final String ERROR_MESSAGE =
@@ -65,16 +63,11 @@ public final class CommandExecutor {
         }
         return 0;
     }
-}
 
-class Test {
-    public static void main(String[] args) {
-        CommandExecutor.execute("h");
-        CommandExecutor.execute("8");
-        CommandExecutor.execute("sp", "-1", "2");
-
-        if (CommandExecutor.execute("e") != 0) {
-            System.exit(0);
-        }
+    public static int execute(String string) {
+        // Splits the string by spaces unless surrounded by quotation marks
+        final List<String> tokens = Arrays.stream(string.split("[\\s\\t]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)")).
+                map(s -> s.replace("\"", "")).map(String::trim).toList();
+        return execute(tokens.get(0), tokens.subList(1, tokens.size()).toArray(new String[0]));
     }
 }

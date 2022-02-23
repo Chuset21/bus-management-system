@@ -4,8 +4,8 @@ import bus_system.command.Command;
 
 import java.util.List;
 
-public class SearchTrip implements Command {
-    public final static List<String> ALIASES = List.of("st", "search-trip");
+public final class SearchTrips implements Command {
+    public final static List<String> ALIASES = List.of("st", "search-trips");
 
     @Override
     public int execute(String... strings) {  // TODO Implement

@@ -14,6 +14,7 @@ public class Main {
         final Scanner scanner = new Scanner(System.in);
         int returnCode;
         do {
+            System.out.print(ConsoleColor.colorize(ConsoleColor.WHITE_BRIGHT,"Insert command: "));
             returnCode = CommandExecutor.execute(scanner.nextLine());
         } while (returnCode == 0);
 

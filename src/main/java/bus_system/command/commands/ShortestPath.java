@@ -10,6 +10,15 @@ import java.util.List;
 
 public final class ShortestPath implements Command {
     public final static List<String> ALIASES = List.of("sp", "shortest-path");
+    public static final String DESCRIPTION = """
+                shortest path   %s      %s
+                    Arguments:  %s
+            \t\tExample:    %s""".formatted(
+            ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
+            ConsoleColor.colorize(ConsoleColor.CYAN, "Finds the shortest path between two given stops."),
+            ConsoleColor.colorize(ConsoleColor.PURPLE_BRIGHT, "<source stop>  <destination stop>"),
+            ConsoleColor.colorize(ConsoleColor.BLUE_BRIGHT, ALIASES.get(ALIASES.size() - 1) + " 646 379")
+    );
 
     @Override
     public int execute(String... strings) {  // TODO Implement fully
@@ -48,14 +57,6 @@ public final class ShortestPath implements Command {
 
     @Override
     public String getDescription() {
-        return """
-                    shortest path   %s      %s
-                        Arguments:  %s
-                \t\tExample:    %s""".formatted(
-                ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
-                ConsoleColor.colorize(ConsoleColor.CYAN, "Finds the shortest path between two given stops."),
-                ConsoleColor.colorize(ConsoleColor.PURPLE_BRIGHT, "<source stop>  <destination stop>"),
-                ConsoleColor.colorize(ConsoleColor.BLUE_BRIGHT, ALIASES.get(ALIASES.size() - 1) + " 646 379")
-        );
+        return DESCRIPTION;
     }
 }

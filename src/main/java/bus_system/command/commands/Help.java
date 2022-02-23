@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public final class Help implements Command {
     public final static List<String> ALIASES = List.of("?", "h", "help");
+    private static String DESCRIPTION = null;
 
     @Override
     public int execute(String... strings) {
@@ -18,19 +19,23 @@ public final class Help implements Command {
 
     @Override
     public String getDescription() {
-        return """
-                %s
-                                
-                    help    %s      %s
-                    
-                %s
-                """.formatted(
-                ConsoleColor.colorize(ConsoleColor.GREEN_BOLD, "Available commands:"),
-                ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
-                ConsoleColor.colorize(ConsoleColor.CYAN, "Lists all possible commands."),
-                CommandExecutor.COMMANDS.values().stream().distinct().
-                        filter(command -> !(command instanceof Help)).
-                        map(Command::getDescription).
-                        collect(Collectors.joining("\n\n")));
+        if (DESCRIPTION == null) {
+            DESCRIPTION = """
+                    %s
+                                    
+                        help    %s      %s
+                        
+                    %s
+                    """.formatted(
+                    ConsoleColor.colorize(ConsoleColor.GREEN_BOLD, "Available commands:"),
+                    ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, ALIASES.toString()),
+                    ConsoleColor.colorize(ConsoleColor.CYAN, "Lists all possible commands."),
+                    CommandExecutor.COMMANDS.values().stream().distinct().
+                            filter(command -> !(command instanceof Help)).
+                            map(Command::getDescription).
+                            collect(Collectors.joining("\n\n")));
+        }
+
+        return DESCRIPTION;
     }
 }

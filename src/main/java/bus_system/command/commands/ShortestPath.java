@@ -3,6 +3,8 @@ package bus_system.command.commands;
 import bus_system.command.Command;
 import bus_system.command.CommandExecutor;
 import bus_system.command.ansi.ConsoleColor;
+import bus_system.data.BusStop;
+import bus_system.util.path.Path;
 
 import java.util.List;
 
@@ -24,12 +26,23 @@ public final class ShortestPath implements Command {
             throw new NumberFormatException("Error, please make sure that both arguments are valid integers.");
         }
 
+        if (fromStop == destStop) {
+            throw new IllegalArgumentException("Error, source and destination cannot be the same.");
+        }
+
         if (!CommandExecutor.BUS_NETWORK.containsStop(fromStop)) {
             throw new IllegalArgumentException("Source stop '%d' doesn't exist in the bus network.".formatted(fromStop));
         } else if (!CommandExecutor.BUS_NETWORK.containsStop(destStop)) {
             throw new IllegalArgumentException("Destination stop '%d' doesn't exist in the bus network.".formatted(destStop));
         }
 
+        final Path<BusStop> path = CommandExecutor.BUS_NETWORK.getShortestPath(fromStop, destStop);
+        if (path.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "There is no path from stop '%d' to stop '%d'".formatted(fromStop, destStop));
+        }
+
+        System.out.println(path);
         return 0;
     }
 

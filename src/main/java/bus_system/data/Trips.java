@@ -1,7 +1,10 @@
 package bus_system.data;
 
+import bus_system.command.ansi.ConsoleColor;
+
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 final class Trips {
     private static final Comparator<TripSegment> TRIP_SEGMENT_COMPARABLE = (o1, o2) -> {
@@ -32,7 +35,7 @@ final class Trips {
                     values.get(4), values.get(5), values.get(6), values.get(7), values.size() == 9 ? values.get(8) : "");
 
             if (tripSegment.arrivalTime().isPresent() && tripSegment.departureTime().isPresent() &&
-                    tripSegment.tripID().isPresent()) {
+                tripSegment.tripID().isPresent()) {
                 this.tripSegments.computeIfAbsent(tripSegment.tripID().get(), v -> new ArrayList<>()).add(tripSegment);
             }
         }
@@ -44,20 +47,51 @@ final class Trips {
         return Collections.unmodifiableMap(tripSegments);
     }
 
-    public List<TripSegment> searchByArrivalTime(String arrivalTime) {
+    public List<List<TripSegment>> searchByArrivalTime(String arrivalTime) {
         if (arrivalTime == null) {
             return null;
         }
-        final List<TripSegment> result = new ArrayList<>();
+        final List<List<TripSegment>> result = new ArrayList<>();
 
         for (List<TripSegment> tripSegment : tripSegments.values()) {
             final int index = Collections.binarySearch(tripSegment, new TripSegment("", arrivalTime, "00:00:00",
-                            "", "", "", "", "", ""), TRIP_SEGMENT_COMPARABLE);
+                    "", "", "", "", "", ""), TRIP_SEGMENT_COMPARABLE);
             if (index >= 0) {
-                result.add(tripSegment.get(index));
+                result.add(tripSegment);
             }
         }
 
         return result;
+    }
+
+    /**
+     * String representation of {@link #searchByArrivalTime(String)}
+     *
+     * @param arrivalTime Arrival time to search for
+     * @return String representation of the lists of TripSegment
+     */
+    public String findArrivalTimeTrips(String arrivalTime) {
+        if (arrivalTime == null) {
+            return null;
+        }
+        final StringJoiner result = new StringJoiner("\n\n");
+
+        for (List<TripSegment> tripSegment : tripSegments.values()) {
+            final int index = Collections.binarySearch(tripSegment, new TripSegment("", arrivalTime, "00:00:00",
+                    "", "", "", "", "", ""), TRIP_SEGMENT_COMPARABLE);
+            if (index >= 0) {
+                result.add("%s: %s\n%s".formatted(
+                        ConsoleColor.colorize(ConsoleColor.WHITE_BRIGHT, "Trip ID"),
+                        ConsoleColor.colorize(
+                                ConsoleColor.PURPLE_BRIGHT, tripSegment.get(index).tripID().orElse(-1).toString()),
+                        tripSegment.stream().map(Object::toString).
+                                map(s -> "\t" + s.replace("\n", "\n\t"))  // Adding tabs everywhere
+                                .collect(Collectors.joining(",\n"))));
+            }
+        }
+
+        return result.toString().
+                replace("{", ConsoleColor.colorize(ConsoleColor.WHITE_BRIGHT, "{")).
+                replace("}", ConsoleColor.colorize(ConsoleColor.WHITE_BRIGHT, "}"));
     }
 }

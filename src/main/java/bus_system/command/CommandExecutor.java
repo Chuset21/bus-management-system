@@ -15,7 +15,7 @@ public final class CommandExecutor {
     private static final String ERROR_MESSAGE =
             ConsoleColor.colorize(ConsoleColor.RED_BOLD, "Error, please provide a valid command.\n") +
             "To see all valid commands try " +
-            ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, "'--help'\n");
+            ConsoleColor.colorize(ConsoleColor.YELLOW_BOLD, "'--help'");
     public static final BusNetwork BUS_NETWORK;
 
     static {

@@ -3,6 +3,7 @@ package bus_system.command;
 import bus_system.command.ansi.ConsoleColor;
 import bus_system.command.commands.Exit;
 import bus_system.command.commands.Help;
+import bus_system.command.commands.SearchBusStops;
 import bus_system.command.commands.ShortestPath;
 import bus_system.data.BusNetwork;
 
@@ -39,6 +40,9 @@ public final class CommandExecutor {
 
         final ShortestPath shortestPath = new ShortestPath();
         ShortestPath.ALIASES.forEach(a -> COMMANDS.put(a, shortestPath));
+
+        final SearchBusStops searchBusStops = new SearchBusStops();
+        SearchBusStops.ALIASES.forEach(a -> COMMANDS.put(a, searchBusStops));
     }
 
     // Suppresses default constructor, ensuring non-instantiability.

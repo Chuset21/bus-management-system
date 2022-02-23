@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public final class Help implements Command {
-    public final static List<String> ALIASES = List.of("-?", "-h", "--help");
+    public final static List<String> ALIASES = List.of("?", "h", "help");
 
     @Override
     public void execute(String... strings) {

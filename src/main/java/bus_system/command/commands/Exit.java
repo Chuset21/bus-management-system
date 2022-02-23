@@ -6,7 +6,7 @@ import bus_system.command.ansi.ConsoleColor;
 import java.util.List;
 
 public final class Exit implements Command {
-    public final static List<String> ALIASES = List.of("-e", "--exit");
+    public final static List<String> ALIASES = List.of("e", "exit");
 
     @Override
     public void execute(String... strings) {

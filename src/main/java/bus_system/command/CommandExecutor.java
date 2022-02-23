@@ -68,9 +68,9 @@ public final class CommandExecutor {
 
 class Test {
     public static void main(String[] args) {
-        CommandExecutor.execute("-h");
+        CommandExecutor.execute("h");
         CommandExecutor.execute("8");
-        CommandExecutor.execute("-sp", "-1", "2");
-        CommandExecutor.execute("-e");
+        CommandExecutor.execute("sp", "-1", "2");
+        CommandExecutor.execute("e");
     }
 }

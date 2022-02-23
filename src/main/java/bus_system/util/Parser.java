@@ -39,4 +39,15 @@ public class Parser {
             return null;
         }
     }
+
+    public static String mutateToValidTime(String time) {
+        final String[] tokens = time.split(":");
+        for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i].length() < 2) {
+                tokens[i] = '0' + tokens[i];
+            }
+        }
+
+        return String.join(":", tokens);
+    }
 }

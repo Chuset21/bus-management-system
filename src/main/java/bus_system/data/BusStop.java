@@ -1,7 +1,7 @@
 package bus_system.data;
 
+import bus_system.command.ansi.ConsoleColor;
 import bus_system.util.OptionalOps;
-import bus_system.util.Pretty;
 
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ import static bus_system.util.Parser.*;
 public record BusStop(Optional<Integer> stopID, Optional<Integer> stopCode, Optional<String> stopName,
                       Optional<String> stopDescription, Optional<Double> stopLatitude, Optional<Double> stopLongitude,
                       Optional<String> zoneID, Optional<String> stopUrl, Optional<Integer> locationType,
-                      Optional<String> parentStation) implements Pretty {
+                      Optional<String> parentStation) {
 
     public BusStop(String stopID, String stopCode, String stopName, String stopDescription, String stopLatitude,
                    String stopLongitude, String zoneID, String stopUrl, String locationType, String parentStation) {
@@ -21,9 +21,9 @@ public record BusStop(Optional<Integer> stopID, Optional<Integer> stopCode, Opti
     }
 
     @Override
-    public String toPrettyString() {
+    public String toString() {
         return ("""
-                {
+                %s
                     Stop ID: %s,
                     Stop Code: %s,
                     Stop Name: %s,
@@ -34,10 +34,19 @@ public record BusStop(Optional<Integer> stopID, Optional<Integer> stopCode, Opti
                     Stop URL: %s,
                     Location Type: %s,
                     Parent station: %s
-                }""").
-                formatted(OptionalOps.getStringValue(stopID), OptionalOps.getStringValue(stopCode), OptionalOps.getStringValue(stopName),
-                        OptionalOps.getStringValue(stopDescription), OptionalOps.getStringValue(stopLatitude), OptionalOps.getStringValue(stopLongitude),
-                        OptionalOps.getStringValue(zoneID), OptionalOps.getStringValue(stopUrl), OptionalOps.getStringValue(locationType),
-                        OptionalOps.getStringValue(parentStation));
+                %s""").
+                formatted(
+                        ConsoleColor.colorize(ConsoleColor.WHITE_BRIGHT, "{"),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(stopID)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(stopCode)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(stopName)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(stopDescription)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(stopLatitude)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(stopLongitude)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(zoneID)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(stopUrl)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(locationType)),
+                        ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, OptionalOps.getStringValue(parentStation)),
+                        ConsoleColor.colorize(ConsoleColor.WHITE_BRIGHT, "}"));
     }
 }

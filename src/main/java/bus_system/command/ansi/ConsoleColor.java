@@ -75,6 +75,7 @@ public enum ConsoleColor {
     WHITE_BACKGROUND_BRIGHT("\033[0;107m");
 
     private final String value;
+    public static boolean supportsAnsi = true;
 
     ConsoleColor(String value) {
         this.value = value;
@@ -85,6 +86,10 @@ public enum ConsoleColor {
     }
 
     public static String colorize(ConsoleColor color, String string) {  // Has no error checking
-        return color.value + string + RESET.getValue();
+        if (supportsAnsi) {
+            return color.value + string + RESET.value;
+        } else {
+            return string;
+        }
     }
 }

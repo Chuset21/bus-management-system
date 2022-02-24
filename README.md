@@ -6,7 +6,7 @@ A bus management system built for a college assignment.
 - Java 17
 
 ## Running
-Make sure to download the jar file in the jar directory.  
+Make sure to download the [jar file](jar/bus-management-system-1.0-SNAPSHOT.jar) in the jar directory.  
 Open your preferred terminal.
 cd into the directory where this jar is stored (it doesn't have to be stored anywhere specific) `cd some-directory`  
 In the command line run: `java -jar bus-management-system-1.0-SNAPSHOT.jar`

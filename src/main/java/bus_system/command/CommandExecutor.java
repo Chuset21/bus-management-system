@@ -20,7 +20,7 @@ public final class CommandExecutor {
                     "stops.txt", "transfers.txt");
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to load bus network.");
+            throw new RuntimeException("Failed to load bus network.", e);
         }
     }
 

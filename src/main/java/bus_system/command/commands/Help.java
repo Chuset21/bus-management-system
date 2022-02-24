@@ -25,7 +25,7 @@ public final class Help implements Command {
                                     
                         help    %s      %s
                         
-                    %s
+                        %s
                     """.formatted(
                     ConsoleColor.colorize(ConsoleColor.GREEN_BOLD, "Available commands:"),
                     ConsoleColor.colorize(ConsoleColor.YELLOW_BRIGHT, ALIASES.toString()),

@@ -21,8 +21,8 @@ public class BusNetwork {
     }
 
     private void getStopsFromFile(String stopFilePath) throws IOException {
-        final BufferedReader reader = new BufferedReader(new FileReader(Objects.requireNonNull(
-                getClass().getClassLoader().getResource(stopFilePath)).getFile()));
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(
+                getClass().getClassLoader().getResourceAsStream(stopFilePath))));
 
         // Skip the first line containing the names of each value
         reader.readLine();
@@ -44,8 +44,8 @@ public class BusNetwork {
     }
 
     private void getTransferFromFile(String transferFilePath) throws IOException {
-        final BufferedReader reader = new BufferedReader(new FileReader(Objects.requireNonNull(
-                getClass().getClassLoader().getResource(transferFilePath)).getFile()));
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(
+                getClass().getClassLoader().getResourceAsStream(transferFilePath))));
 
         // Skip the first line containing the names of each value
         reader.readLine();

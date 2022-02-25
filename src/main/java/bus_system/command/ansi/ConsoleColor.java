@@ -77,7 +77,8 @@ public enum ConsoleColor {
     WHITE_BACKGROUND_BRIGHT("\033[0;107m");
 
     private final String value;
-    public static final boolean HAS_ANSI_SUPPORT = hasAnsiSupport();
+    private static final boolean HAS_ANSI_SUPPORT = hasAnsiSupport();
+    public static boolean forceAnsi;
 
     ConsoleColor(String value) {
         this.value = value;
@@ -93,8 +94,8 @@ public enum ConsoleColor {
                System.getenv().containsKey("IDEA_INITIAL_DIRECTORY"); // True if running on IntelliJ console
     }
 
-    public static String colorize(ConsoleColor color, String string) {  // Has no error checking
-        if (HAS_ANSI_SUPPORT) {
+    public static String colorize(ConsoleColor color, String string) {
+        if (HAS_ANSI_SUPPORT || forceAnsi) {
             return color.value + string + RESET.value;
         } else {
             return string;

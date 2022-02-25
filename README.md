@@ -1,6 +1,6 @@
 # Bus Management System
 
-A bus management system built for a college assignment.  
+A bus management system for Vancouver built for a college assignment.  
 
 Link to repository: https://github.com/Chuset21/bus-management-system  
 The `stops.txt`, `stop_times.txt` and `transfers.txt` files must be placed inside the [src/main/resources](src/main/resources) folder.

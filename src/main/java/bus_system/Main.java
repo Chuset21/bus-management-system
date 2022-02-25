@@ -31,7 +31,7 @@ public final class Main {
         int returnCode;
         do {
             System.out.print(ConsoleColor.colorize(ConsoleColor.WHITE_BRIGHT, "Insert command: "));
-            returnCode = CommandExecutor.execute(SCANNER.nextLine());
+            returnCode = CommandExecutor.execute(SCANNER.nextLine().trim());
         } while (returnCode == 0);
 
         SCANNER.close();

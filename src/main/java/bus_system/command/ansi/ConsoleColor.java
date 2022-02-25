@@ -1,5 +1,7 @@
 package bus_system.command.ansi;
 
+import java.util.Locale;
+
 public enum ConsoleColor {
     // Reset
     RESET("\033[0m"),
@@ -75,7 +77,7 @@ public enum ConsoleColor {
     WHITE_BACKGROUND_BRIGHT("\033[0;107m");
 
     private final String value;
-    public static boolean supportsAnsi = true;
+    public static final boolean HAS_ANSI_SUPPORT = supportsAnsi();
 
     ConsoleColor(String value) {
         this.value = value;
@@ -85,8 +87,13 @@ public enum ConsoleColor {
         return value;
     }
 
+    private static boolean supportsAnsi() {
+        return !System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win") ||
+               System.getenv().containsKey("WT_SESSION");
+    }
+
     public static String colorize(ConsoleColor color, String string) {  // Has no error checking
-        if (supportsAnsi) {
+        if (HAS_ANSI_SUPPORT) {
             return color.value + string + RESET.value;
         } else {
             return string;

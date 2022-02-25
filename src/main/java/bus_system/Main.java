@@ -21,11 +21,11 @@ public final class Main {
     }
 
     public static void main(String[] args) {
-        System.out.printf("""
-                %s
-                If the above text has no funny characters and you'd like colors please input 'y', input anything else otherwise:\040""",
-                RAINBOW_MESSAGE);
-        ConsoleColor.supportsAnsi = "y".equalsIgnoreCase(SCANNER.nextLine().trim());
+//        System.out.printf("""
+//                %s
+//                If the above text has no funny characters and you'd like colors please input 'y', input anything else otherwise:\040""",
+//                RAINBOW_MESSAGE);
+//        ConsoleColor.supportsAnsi = "y".equalsIgnoreCase(SCANNER.nextLine().trim());
         System.out.println(ConsoleColor.colorize(ConsoleColor.WHITE_BRIGHT,
                 "\nLoading application, please wait and don't input anything as your inputs will be buffered.\n"));
         CommandExecutor.execute("help");

@@ -34,6 +34,10 @@ public final class SearchTrips implements Command {
         }
 
         final String validatedTime = Parser.mutateToValidTime(strings[0]);
+        if (Parser.parseTime(validatedTime) == null) {
+            throw new IllegalArgumentException("'%s' is not a valid time.".formatted(validatedTime));
+        }
+
         final String arrivalTimeTrips = CommandExecutor.BUS_NETWORK.findArrivalTimeTrips(validatedTime);
         if (arrivalTimeTrips.isBlank()) {
             throw new IllegalArgumentException("There are no trips arriving at '%s'".formatted(validatedTime));

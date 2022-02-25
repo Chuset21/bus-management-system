@@ -77,7 +77,7 @@ public enum ConsoleColor {
     WHITE_BACKGROUND_BRIGHT("\033[0;107m");
 
     private final String value;
-    public static final boolean HAS_ANSI_SUPPORT = supportsAnsi();
+    public static final boolean HAS_ANSI_SUPPORT = hasAnsiSupport();
 
     ConsoleColor(String value) {
         this.value = value;
@@ -87,9 +87,10 @@ public enum ConsoleColor {
         return value;
     }
 
-    private static boolean supportsAnsi() {
-        return !System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win") ||
-               System.getenv().containsKey("WT_SESSION");
+    private static boolean hasAnsiSupport() {
+        return !System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win") || // True if not on Windows
+               System.getenv().containsKey("WT_SESSION") ||  // True if running on Windows terminal console
+               System.getenv().containsKey("IDEA_INITIAL_DIRECTORY"); // True if running on IntelliJ console
     }
 
     public static String colorize(ConsoleColor color, String string) {  // Has no error checking

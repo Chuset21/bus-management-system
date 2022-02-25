@@ -11,7 +11,7 @@ The `stops.txt`, `stop_times.txt` and `transfers.txt` files must be placed insid
 
 ## Running
 
-Make sure to download the [jar file](jar/bus-management-system-1.0-SNAPSHOT.jar) in the jar directory.  
+Make sure to download the [jar file](jar/bus-management-system-1.0-SNAPSHOT.jar) in the jar directory or from [releases](https://github.com/Chuset21/bus-management-system/releases).  
 Open your preferred terminal.
 cd into the directory where this jar is stored (it doesn't have to be stored anywhere specific) `cd some-directory`  
 In the command line run: `java -jar bus-management-system-1.0-SNAPSHOT.jar`  

@@ -20,7 +20,7 @@ public final class Main {
         try {
             enableAnsi(args);
         } catch (IllegalArgumentException iae) {
-            System.out.println(iae.getMessage());
+            System.err.println(iae.getMessage());
             System.exit(-1);
         }
 
@@ -64,7 +64,6 @@ public final class Main {
         } else {
             throw new IllegalArgumentException("""
                     '%s' unrecognised optional argument.
-                    Valid arguments include:
                     %s""".
                     formatted(string, VALID_ARGUMENTS_MESSAGE));
         }

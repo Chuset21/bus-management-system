@@ -15,13 +15,12 @@ If you know that your terminal supports ANSI coloring and the program isn't dete
 
 ## Using
 Pass arguments separated by spaces/tabs.  
-If you would like to pass an argument containing white space please make sure to surround the argument with quotation  
-marks, like so __"\<argument>"__.
+If you would like to pass an argument containing white space please make sure to surround the argument with quotation marks, like so __"argument with spaces"__.
 
 ## Colors
-I suggest using a console with a black background (since the colors are bright) that supports __ANSI__ coloring,  
-if you don't know if your console supports it, don't worry, the program should take care of that, if it doesn't try  
-running it with `java -jar bus-management-system-1.0-SNAPSHOT.jar force-ansi`.   
+I suggest using a console with a black background (since the colors are bright) that supports __ANSI__ coloring, if you don't know if your console supports it, don't worry, the program should take care of that, if it doesn't try running it with  
+`java -jar bus-management-system-1.0-SNAPSHOT.jar force-ansi`
+
 Known consoles to not support ANSI:
  - Command prompt  
  - Windows Powershell  
